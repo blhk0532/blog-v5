@@ -1,0 +1,146 @@
+{{--
+Wraps public pages in the shared site chrome and accepts page metadata, flags, attributes, and slot content.
+--}}
+
+@props([
+    'canonical' => url()->current(),
+    'description' => 'The best hub for developers. Learn about PHP, Laravel, and practical web application engineering.',
+    'image' => Vite::asset('resources/img/apple-touch-icon.png'),
+    'title',
+    'type' => 'website',
+])
+
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+        <title>{{ $title }}</title>
+
+        <meta name="robots" content="max-image-preview:large" />
+        <meta name="title" content="{{ $title }}" />
+        <meta name="description" content="{{ $description }}" />
+
+        <meta property="og:type" content="{{ $type }}" />
+        <meta property="og:url" content="{{ $canonical }}" />
+        <meta property="og:site_name" content="{{ config('app.name') }}" />
+        <meta property="og:title" content="{{ $title }}" />
+        <meta property="og:description" content="{{ $description }}" />
+        <meta property="og:image" content="{{ $image }}" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="{{ $canonical }}" />
+        <meta name="twitter:title" content="{{ $title }}" />
+        <meta name="twitter:description" content="{{ $description }}" />
+        <meta name="twitter:image" content="{{ $image }}" />
+
+        @livewireStyles
+
+        @vite('resources/css/app.css')
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@200..800&display=swap"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link 
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Indie+Flower&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+            onload="this.onload=null;this.rel='stylesheet'"
+        >
+
+        <link rel="icon" type="image/png" href="{{ Vite::asset('resources/img/favicon-96x96.png') }}" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="{{ Vite::asset('resources/img/favicon.svg') }}" />
+        <link rel="shortcut icon" href="{{ Vite::asset('resources/img/favicon.ico') }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ Vite::asset('resources/img/apple-touch-icon.png') }}" />
+
+        <link rel="canonical" href="{{ $canonical }}" />
+
+        <x-feed-links />
+
+        <script type="application/ld+json">
+            {!! json_encode([
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    [
+                        '@type' => 'Organization',
+                        '@id' => url('/') . '#organization',
+                        'name' => config('app.name'),
+                        'url' => url('/'),
+                        'logo' => [
+                            '@type' => 'ImageObject',
+                            'url' => Vite::asset('resources/img/apple-touch-icon.png'),
+                        ],
+                    ],
+                    [
+                        '@type' => 'WebSite',
+                        '@id' => url('/') . '#website',
+                        'name' => config('app.name'),
+                        'url' => url('/'),
+                        'publisher' => [
+                            '@id' => url('/') . '#organization',
+                        ],
+                    ],
+                ],
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    </head>
+    <body {{ $attributes->class('font-light text-gray-600') }} x-data>
+        <div class="flex flex-col min-h-screen">
+            @if (app('impersonate')->isImpersonating())
+                <div class="text-white bg-orange-600">
+                    <p class="container p-4 text-center leading-[1.35] text-sm sm:text-base">
+                        Currently impersonating {{ auth()->user()->name }}.
+                        <a
+                            href="{{ route('leave-impersonation') }}"
+                            class="font-medium underline"
+                        >
+                            Return&nbsp;to&nbsp;account →
+                        </a>
+                    </p>
+                </div>
+            @endif
+
+            @empty($hideTopAd)
+                <x-ads.top.sevalla />
+            @endempty
+
+            <div x-intersect:leave="$dispatch('toggle-sticky-carousel')"></div>
+    
+            @empty($hideNavigation)
+                <header class="container mt-4 xl:max-w-(--breakpoint-lg)">
+                    <x-nav />
+                </header>
+            @endempty
+
+            <main @class([
+                'grow',
+                'py-12 md:py-16' => empty($hideNavigation),
+            ])>
+                {{ $slot }}
+            </main>
+
+            @empty($hideFooter)
+                <x-footer />
+            @endempty
+        </div>
+
+        <x-status />
+
+        <livewire:search />
+
+        @empty($hideStickyCarousel)
+            <x-ads.bottom :ads="[]" />
+        @endempty
+
+        @livewireScriptConfig
+
+        @vite('resources/js/app.js')
+
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="629ef822-187d-4a1f-bfe3-494a35f1e1b9"></script>
+    </body>
+</html>

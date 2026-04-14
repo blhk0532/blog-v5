@@ -1,0 +1,123 @@
+---
+id: "01KKEW27DFVFB4R7EHDN2WXP15"
+title: "Laravel where clauses: query builder examples that matter"
+slug: "laravel-query-builder-where-clauses"
+author: "benjamincrozat"
+description: "Use Laravel query builder where clauses with practical examples for where(), orWhere(), whereNot(), JSON conditions, whereBetween(), and whereIn()."
+categories:
+  - "laravel"
+published_at: 2023-09-12T00:00:00+02:00
+modified_at: 2026-03-14T10:22:32Z
+serp_title: null
+serp_description: null
+canonical_url: ""
+is_commercial: false
+image_disk: "cloudflare-images"
+image_path: "images/posts/z7Tn43q4XKqZ3fb.jpg"
+sponsored_at: null
+---
+## Introduction
+
+Laravel where clauses are the backbone of everyday query builder work. Use them to filter records with `where()`, combine conditions with `orWhere()`, negate groups with `whereNot()`, and target JSON or range-based data when a plain equality check is not enough.
+
+If you just need the mental model first, think of them as readable wrappers around SQL conditions that chain naturally in Eloquent and the query builder.
+
+## The essentials of Laravel where clauses
+
+### Basic where clauses
+
+The foundation of any query is its conditions. In Laravel's query builder, the basic structure of where clauses is intuitive and expressive. Simply put, you mention the column, the operator, and the value you want to compare.
+
+For instance, imagine fetching comments with 100 votes:
+
+```php
+$comments = Comment::where('votes', '=', 100)->get();
+```
+
+I think it's nice. What about you? But that's not it. Laravel lets you simplify where equals clauses:
+
+```php
+$comments = Comment::where('votes', 100)->get();
+```
+
+If you're just checking for equality, Laravel assumes you mean the '=' operator. 
+
+And what if you want to combine where clauses?
+
+```php
+Foo::query()
+    ->where('foo', 'bar')
+    ->where('bar', 'baz')
+    ->get();
+```
+
+There is the beauty of Laravel's query builder!
+
+[Learn more about basic where clauses.](https://laravel.com/docs/10.x/queries#basic-where-clauses)
+
+### Or where clauses
+
+Life isn't always about "and". Sometimes, it's about "or" (pardon my philosophical side). And Laravel's query builder gracefully understands that. While chaining multiple where methods will join them using "and", there's an elegant way to use the "or" condition: the `orWhere` method.
+
+Here’s a quick example:
+
+```php
+$users = User::query()
+    ->where('votes', '>', 100)
+    ->orWhere('name', 'John')
+    ->get();
+```
+
+This fetches users who either have votes more than 100 or are named John. Handy, right?
+
+[Learn more about orWhere clauses.](https://laravel.com/docs/10.x/queries#or-where-clauses)
+
+### Where not clauses
+
+Sometimes, it's not about what something is, but what it's not (I did it again…). That’s where the `whereNot` clauses come into play. They negate a set of conditions, making exclusions a breeze.
+
+For instance, if you wish to exclude products on clearance or priced below ten, it's as straightforward as:
+
+```php
+$products = Product::query()
+    ->whereNot(function (Builder $query) {
+        $query->where('clearance', true)
+            ->orWhere('price', '<', 10);
+    })
+    ->get();
+```
+
+[Learn more about whereNot clauses.](https://laravel.com/docs/10.x/queries#where-not-clauses)
+
+### JSON where clauses
+
+With the digital age's demands, databases have evolved, and so has Laravel. Modern databases often use JSON column types, and Laravel's query builder supports querying these like a champ! Be it MySQL, PostgreSQL, or even SQLite, you can fetch data with ease.
+
+Looking for users who prefer a salad meal? There you go:
+
+```php
+$users = User::query()
+    ->where('preferences->dining->meal', 'salad')
+    ->get();
+```
+
+[Learn more about JSON where clauses.](https://laravel.com/docs/10.x/queries#json-where-clauses)
+
+### Additional where clauses
+
+Laravel's query builder's where capabilities don't just stop at the basics. It offers a plethora of options to cater to different scenarios:
+
+- **Between values**: The `whereBetween` method checks if a column's value lies between two given values. Similarly, `whereNotBetween` ensures the column's value is outside those two values.
+- **In or not in**: The `whereIn` method is perfect when you want to check if a column's value exists in a given array. Its counterpart, `whereNotIn`, does the exact opposite.
+- **Date & time specific**: Methods like `whereDate`, `whereMonth`, and `whereTime` make it easy to fetch records based on specific dates, months, or times.
+- **Comparing columns**: With the `whereColumn` method, you can effortlessly compare two columns in the same table. Be it checking for equality or any other relation.
+
+[Learn more about additional where clauses.](https://laravel.com/docs/10.x/queries#additional-where-clauses)
+
+If you are still shaping complex Eloquent queries, these are the follow-up reads I would keep open:
+
+- [Filter results with whereIn() without tripping over the basics](/laravel-query-builder-wherein)
+- [Sort Eloquent results cleanly with orderBy](/laravel-order-by)
+- [Write validation rules with less guesswork](/laravel-validation)
+- [Validate nested arrays in Laravel without losing your mind](/laravel-array-validation)
+- [Use database transactions when partial writes would hurt](/database-transactions-laravel)

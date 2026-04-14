@@ -1,0 +1,75 @@
+{{--
+Shows a curated link card and accepts the link record, loading priority, attributes, and slot content.
+--}}
+
+@props([
+    'link',
+    'priority' => false,
+])
+
+<div {{ $attributes }}>
+    <a
+        href="{{ $link->url }}"
+        target="_blank"
+    >
+        @if ($link->image_url)
+            <img
+                loading="{{ $priority ? 'eager' : 'lazy' }}"
+                decoding="async"
+                fetchpriority="{{ $priority ? 'high' : 'low' }}"
+                src="{{ $link->image_url }}"
+                alt="{{ $link->title  }}"
+                class="object-cover rounded-xl ring-1 shadow-md transition-opacity shadow-black/5 aspect-video hover:opacity-50 ring-black/5"
+            />
+        @else
+            <div class="transition-opacity {{ \App\Support\PlaceholderCardColor::for($link->url) }} shadow-md ring-1 ring-black/5 hover:opacity-50 aspect-video rounded-xl shadow-black/5"></div>
+        @endif
+    </a>
+
+    <div class="flex gap-2 items-center mt-4">
+        @if ($link->post)
+            <a wire:navigate href="{{ route('posts.show', $link->post) }}" class="underline underline-offset-4 decoration-gray-600/30 decoration-1">
+        @endif
+                <time datetime="{{ $link->is_approved }}">
+                    {{ $link->is_approved->isoFormat('LL') }}
+                </time>
+        @if ($link->post)
+            </a>
+        @endif
+
+        <a
+            href="{{ $link->user->github_data['user']['html_url'] }}"
+            target="_blank"
+            class="flex items-center"
+        >
+            <span class="mr-2 text-xs opacity-50">
+                /
+            </span>
+
+            <span class="text-black underline underline-offset-4 decoration-black/30">
+                {{ $link->user->name }}
+            </span>
+        </a>
+    </div>
+
+    <div class="flex gap-6 justify-between items-center mt-2">
+        <a
+            href="{{ $link->url }}"
+            target="_blank"
+            class="font-bold transition-colors text-xl/tight hover:text-blue-600"
+        >
+            {{ $link->title }}
+        </a>
+
+        <img
+            loading="lazy"
+            src="{{ $link->user->avatar }}"
+            alt="{{ $link->user->name }}"
+            class="rounded-full ring-1 ring-black/5 size-10"
+        />
+    </div>
+
+    <div class="mt-2">
+        {!! \App\Markdown\MarkdownRenderer::parse($link->description ?? '') !!}
+    </div>
+</div>
