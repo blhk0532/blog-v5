@@ -21,9 +21,9 @@ Displays the home view.
             <x-btn
                 size="md"
                 wire:navigate
-                href="#about"
+                href="{{ route('complaints.create') }}"
             >
-                About
+                Write A Review
             </x-btn>
 
             <x-btn
@@ -53,7 +53,7 @@ Displays the home view.
     </x-section>
 
 
-    <x-section title="Latest Companies" id="links" class="mt-24 md:mt-32">
+    <x-section title="Latest Reviews" id="links" class="mt-24 md:mt-32">
         @if ($links->isNotEmpty())
             <x-links-grid :$links />
         @endif
@@ -64,7 +64,7 @@ Displays the home view.
             href="{{ route('links.index') }}"
             class="table mx-auto mt-16"
         >
-            Browse all companies
+            Browse all reviews
         </x-btn>
     </x-section>
 

@@ -39,17 +39,17 @@ Presents the nav index component UI and accepts component props, Blade attribute
         </x-nav.item>
 
         <x-nav.item
-            active-icon="heroicon-s-link"
-            icon="heroicon-o-link"
+            active-icon="heroicon-s-star"
+            icon="heroicon-o-star"
             href="{{ route('links.index') }}"
         >
-            Companies
+            Reviews
         </x-nav.item>
 
         <x-nav.item
-            active-icon="heroicon-s-computer-desktop"
-            icon="heroicon-o-computer-desktop"
-            href="{{ route('tools.index') }}"
+            active-icon="heroicon-s-tag"
+            icon="heroicon-o-tag"
+            href="{{ route('categories.index') }}"
         >
             Categories
         </x-nav.item>
