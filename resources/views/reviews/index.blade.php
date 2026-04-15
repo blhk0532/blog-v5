@@ -1,10 +1,10 @@
 {{--
-Displays the links index view.
+Displays the reviews index view.
 --}}
 
 <x-app
-    title="The latest community-written articles about web development in {{ date('Y') }}"
-    description="A collection of content created and shared by other web developers."
+    title="Latest company reviews and complaints - File a Complaint"
+    description="A collection of reviews and complaints about companies and services."
 >
     <div class="container mb-12 md:mb-14">
         <x-breadcrumbs :items="$breadcrumbs" />
@@ -13,11 +13,11 @@ Displays the links index view.
     @if ($links->currentPage() === 1)
         <div class="container text-center">
             <x-typography.headline>
-                <span class="text-blue-600">Keep learning</span> with the community
+                <span class="text-blue-600">Share your experience</span> with companies
             </x-typography.headline>
 
             <x-typography.subheadline class="mt-6 md:mt-10">
-                Find tons of resources written and shared by <span class="font-medium">{{ $distinctUsersCount }} web developers</span>.
+                Find reviews and complaints shared by <span class="font-medium">{{ $distinctUsersCount }} users</span>.
             </x-typography.subheadline>
 
             <div class="flex justify-center items-center mt-4 md:mt-6">
@@ -29,16 +29,16 @@ Displays the links index view.
             </div>
 
             <div class="flex gap-2 justify-center items-center mt-8 text-center md:mt-12">
-                <x-btn href="#links">
-                    Browse
+                <x-btn href="#reviews">
+                    Browse reviews
                 </x-btn>
 
                 <x-btn
                     primary
                     :wire:navigate="auth()->check()"
-                    href="{{ route('links.create') }}"
+                    href="{{ route('reviews.create') }}"
                 >
-                    Submit a link
+                    Submit a review
                 </x-btn>
             </div>
         </div>
@@ -46,9 +46,9 @@ Displays the links index view.
 
     <x-section :title="$links->currentPage() > 1
         ? 'Page ' . $links->currentPage()
-        : 'Latest Links'"
+        : 'Latest Reviews'"
     :heading-tag="$links->currentPage() === 1 ? 'h2' : 'h1'"
-    id="links" @class([
+    id="reviews" @class([
         'mt-16 md:mt-24' => $links->currentPage() === 1,
     ])>
         @if ($links->isNotEmpty())

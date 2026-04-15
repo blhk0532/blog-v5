@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\LinkWizard\LinkWizard;
 use App\Http\Controllers\HomeController;
+use App\Livewire\ComplaintWizard\ComplaintWizard;
 use App\Http\Controllers\Posts\ShowPostController;
 use App\Http\Controllers\Links\ListLinksController;
 use App\Http\Controllers\Posts\ListPostsController;
-use App\Http\Controllers\Tools\ListToolsController;
 use App\Http\Controllers\Authors\ShowAuthorController;
 use App\Http\Controllers\Checkout\StartCheckoutController;
 use App\Http\Controllers\Merchants\ShowMerchantController;
@@ -19,6 +19,10 @@ use App\Http\Controllers\Advertising\ShowAdvertisingLandingPageController;
 
 Route::get('/', HomeController::class)
     ->name('home');
+
+Route::livewire('/file-a-complaint', ComplaintWizard::class)
+    ->middleware('auth')
+    ->name('complaints.create');
 
 Route::get('/blog', ListPostsController::class)
     ->name('posts.index');
@@ -35,18 +39,22 @@ Route::get('/categories', ListCategoriesController::class)
 Route::get('/categories/{category:slug}', ShowCategoryController::class)
     ->name('categories.show');
 
-Route::livewire('/links/create', LinkWizard::class)
+Route::livewire('/reviews/create', LinkWizard::class)
     ->middleware('auth')
-    ->name('links.create');
+    ->name('reviews.create');
 
-Route::get('/links', ListLinksController::class)
-    ->name('links.index');
+Route::redirect('/links/create', '/reviews/create', 301);
+
+Route::get('/reviews', ListLinksController::class)
+    ->name('reviews.index');
+
+Route::redirect('/links', '/reviews', 301);
 
 Route::get('/jobs', fn () => abort(410));
 Route::get('/jobs/{any}', fn () => abort(410))
     ->where('any', '.*');
 
-Route::get('/tools', ListToolsController::class)
+Route::redirect('/tools', '/categories', 301)
     ->name('tools.index');
 
 Route::get('/newsletter', fn () => abort(410));

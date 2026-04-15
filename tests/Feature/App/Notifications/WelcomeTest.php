@@ -18,8 +18,8 @@ it('has the expected subject and static content', function () {
     expect($message->greeting)->toBe('Thank you for signing up!');
     expect(implode("\n", $message->introLines))
         ->toContain('post comments')
-        ->toContain('submit links')
-        ->toContain(route('links.index'))
+        ->toContain('submit reviews')
+        ->toContain(route('reviews.index'))
         ->toContain('popular articles:');
 
     expect(implode("\n", array_merge($message->introLines, $message->outroLines)))

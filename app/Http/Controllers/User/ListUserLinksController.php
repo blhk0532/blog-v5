@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * Lists the authenticated user's submitted links with pagination.
+ * Lists the authenticated user's submitted reviews with pagination.
  */
 class ListUserLinksController extends Controller
 {
     public function __invoke(Request $request) : View
     {
-        return view('user.links', [
+        return view('user.reviews', [
             'links' => $request->user()->links()->paginate(10),
         ]);
     }

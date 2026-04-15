@@ -24,9 +24,9 @@ it("lists the user's links no matter their status", function () {
     ]);
 
     actingAs($user)
-        ->get(route('user.links'))
+        ->get(route('user.reviews'))
         ->assertOk()
-        ->assertViewIs('user.links')
+        ->assertViewIs('user.reviews')
         ->assertViewHas('links', fn (LengthAwarePaginator $links) => 9 === $links->count());
 });
 

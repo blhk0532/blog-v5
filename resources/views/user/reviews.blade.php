@@ -1,20 +1,20 @@
 {{--
-Displays the user links view.
+Displays the user reviews view.
 --}}
 
-<x-app title="Your links">
+    <x-app title="Your reviews">
     <x-section class="lg:max-w-screen-md">
         <header class="flex gap-8 justify-between items-center">
             <x-typography.heading>
-                Your links
+                Your reviews
             </x-typography.heading>
 
             <x-btn
                 primary
                 wire:navigate
-                href="{{ route('links.create') }}"
+                href="{{ route('reviews.create') }}"
             >
-                Submit a new link
+                Submit a new review
             </x-btn>
         </header>
 

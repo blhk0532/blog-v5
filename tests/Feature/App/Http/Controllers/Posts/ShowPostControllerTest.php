@@ -160,7 +160,7 @@ it('builds a single blog breadcrumb trail for posts and omits the current page U
         ->assertOk()
         ->assertViewHas('breadcrumbs', [
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Blog', 'url' => route('posts.index')],
+            ['label' => 'Complaints', 'url' => route('posts.index')],
             ['label' => $post->title],
         ])
         ->assertViewHas('breadcrumbSchema', [
@@ -176,7 +176,7 @@ it('builds a single blog breadcrumb trail for posts and omits the current page U
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
-                    'name' => 'Blog',
+                    'name' => 'Complaints',
                     'item' => route('posts.index'),
                 ],
                 [

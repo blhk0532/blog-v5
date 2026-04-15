@@ -17,33 +17,41 @@ Presents the nav index component UI and accepts component props, Blade attribute
         </div>
 
         <span class="text-base font-bold tracking-widest uppercase">
-            benjamincrozat.com
+            File a Complaint
         </span>
     </a>
 
     <div class="flex grow gap-6 justify-around items-center md:justify-end md:gap-8">
         <x-nav.item
+            active-icon="heroicon-s-document-text"
+            icon="heroicon-o-document-text"
+            href="{{ route('complaints.create') }}"
+        >
+            File a Complaint
+        </x-nav.item>
+
+        <x-nav.item
             active-icon="heroicon-s-fire"
             icon="heroicon-o-fire"
             href="{{ route('posts.index') }}"
         >
-            Latest
+            Complaints
         </x-nav.item>
 
         <x-nav.item
-            active-icon="heroicon-s-link"
-            icon="heroicon-o-link"
-            href="{{ route('links.index') }}"
+            active-icon="heroicon-s-star"
+            icon="heroicon-o-star"
+            href="{{ route('reviews.index') }}"
         >
-            Links
+            Reviews
         </x-nav.item>
 
         <x-nav.item
-            active-icon="heroicon-s-computer-desktop"
-            icon="heroicon-o-computer-desktop"
-            href="{{ route('tools.index') }}"
+            active-icon="heroicon-s-tag"
+            icon="heroicon-o-tag"
+            href="{{ route('categories.index') }}"
         >
-            Tools
+            Categories
         </x-nav.item>
 
         @auth
@@ -92,11 +100,11 @@ Presents the nav index component UI and accepts component props, Blade attribute
                     </x-dropdown.item>
 
                     <x-dropdown.item
-                        icon="heroicon-o-link"
+                        icon="heroicon-o-star"
                         wire:navigate
-                        href="{{ route('user.links') }}"
+                        href="{{ route('user.reviews') }}"
                     >
-                        Your links
+                        Your reviews
                     </x-dropdown.item>
 
                     <x-dropdown.divider />

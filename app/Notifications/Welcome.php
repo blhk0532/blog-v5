@@ -26,7 +26,7 @@ class Welcome extends Notification implements ShouldQueue
         $mailMessage = (new MailMessage)
             ->subject('Your welcome gifts')
             ->greeting('Thank you for signing up!')
-            ->line('You can now **post comments** or [**submit links**](' . route('links.index') . ') to content you find useful or wrote.')
+            ->line('You can now **post comments** or [**submit reviews**](' . route('reviews.index') . ') to content you find useful or wrote.')
             ->line('If you want to keep reading, here are some popular articles:');
 
         Post::query()

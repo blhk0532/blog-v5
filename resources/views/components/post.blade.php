@@ -53,6 +53,13 @@ Shows a blog post card and accepts the post, loading priority, attributes, and o
         </a>
     </div>
 
+    @if ($post->company_name || $post->rating)
+    <div class="mt-2 text-sm text-gray-600">
+        @if ($post->company_name)<span class="mr-3">{{ $post->company_name }}</span>@endif
+        @if ($post->rating)<span>{{ str_repeat('⭐', $post->rating) }}</span>@endif
+    </div>
+    @endif
+
     <div class="mt-4 grow">
         {!! \App\Markdown\MarkdownRenderer::parse($post->description ?? '') !!}
     </div>

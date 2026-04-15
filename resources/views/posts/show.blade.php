@@ -47,6 +47,23 @@ Displays the posts show view.
                     @endif
                 </x-categories>
 
+                @if ($post->company_name || $post->rating || $post->location || $post->status)
+                <div class="my-6 text-center">
+                    @if ($post->company_name)
+                        <span class="inline-block px-3 py-1 text-sm font-medium bg-gray-100 rounded-full">{{ $post->company_name }}</span>
+                    @endif
+                    @if ($post->rating)
+                        <span class="inline-block px-3 py-1 text-sm font-medium bg-yellow-100 rounded-full">{{ str_repeat('⭐', $post->rating) }}</span>
+                    @endif
+                    @if ($post->location)
+                        <span class="inline-block px-3 py-1 text-sm font-medium bg-blue-100 rounded-full">{{ $post->location }}</span>
+                    @endif
+                    @if ($post->status)
+                        <span class="inline-block px-3 py-1 text-sm font-medium {{ $post->status === 'resolved' ? 'bg-green-100' : 'bg-red-100' }} rounded-full">{{ ucfirst($post->status) }}</span>
+                    @endif
+                </div>
+                @endif
+
                 @if ($post->link)
                     <p class="text-sm font-normal tracking-widest text-center uppercase md:text-base">
                         {{ $post->link->domain }}
