@@ -41,7 +41,7 @@ Presents the nav index component UI and accepts component props, Blade attribute
         <x-nav.item
             active-icon="heroicon-s-star"
             icon="heroicon-o-star"
-            href="{{ route('links.index') }}"
+            href="{{ route('reviews.index') }}"
         >
             Reviews
         </x-nav.item>
@@ -100,11 +100,11 @@ Presents the nav index component UI and accepts component props, Blade attribute
                     </x-dropdown.item>
 
                     <x-dropdown.item
-                        icon="heroicon-o-link"
+                        icon="heroicon-o-star"
                         wire:navigate
                         href="{{ route('user.links') }}"
                     >
-                        Your links
+                        Your reviews
                     </x-dropdown.item>
 
                     <x-dropdown.divider />

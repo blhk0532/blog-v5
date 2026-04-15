@@ -24,7 +24,7 @@ trait LinkFeedable
     public function toFeedItem() : FeedItem
     {
         return FeedItem::create()
-            ->id(route('links.index') . '#link-' . $this->getKey())
+            ->id(route('reviews.index') . '#link-' . $this->getKey())
             ->title($this->title)
             ->summary(MarkdownRenderer::parse($this->description ?? ''))
             ->updated($this->is_approved)

@@ -48,7 +48,7 @@ class GenerateSitemap
                 );
             });
 
-        $sitemap->add(route('links.index'));
+        $sitemap->add(route('reviews.index'));
 
         $sitemap->writeToFile($path);
         $this->generateNewsSitemap()->writeToFile($newsPath);

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * Lists the authenticated user's submitted links with pagination.
+ * Lists the authenticated user's submitted reviews with pagination.
  */
 class ListUserLinksController extends Controller
 {

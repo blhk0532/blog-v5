@@ -53,7 +53,7 @@ Displays the home view.
     </x-section>
 
 
-    <x-section title="Latest Reviews" id="links" class="mt-24 md:mt-32">
+    <x-section title="Latest Reviews" id="reviews" class="mt-24 md:mt-32">
         @if ($links->isNotEmpty())
             <x-links-grid :$links />
         @endif
@@ -61,7 +61,7 @@ Displays the home view.
         <x-btn
             primary
             wire:navigate
-            href="{{ route('links.index') }}"
+            href="{{ route('reviews.index') }}"
             class="table mx-auto mt-16"
         >
             Browse all reviews

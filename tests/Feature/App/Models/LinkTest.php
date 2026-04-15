@@ -192,7 +192,7 @@ it('converts a link to a valid FeedItem via toFeedItem()', function () {
     $feedItem = $link->toFeedItem();
 
     expect($feedItem)->toBeInstanceOf(FeedItem::class)
-        ->and($feedItem->id)->toBe(route('links.index') . '#link-' . $link->id)
+        ->and($feedItem->id)->toBe(route('reviews.index') . '#link-' . $link->id)
         ->and($feedItem->title)->toBe('Foo')
         ->and($feedItem->link)->toBe('https://example.com/foo')
         ->and($feedItem->authorName)->toBe('John Doe')

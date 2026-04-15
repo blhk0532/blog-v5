@@ -37,12 +37,16 @@ Route::get('/categories', ListCategoriesController::class)
 Route::get('/categories/{category:slug}', ShowCategoryController::class)
     ->name('categories.show');
 
-Route::livewire('/links/create', LinkWizard::class)
+Route::livewire('/reviews/create', LinkWizard::class)
     ->middleware('auth')
-    ->name('links.create');
+    ->name('reviews.create');
 
-Route::get('/links', ListLinksController::class)
-    ->name('links.index');
+Route::redirect('/links/create', '/reviews/create', 301);
+
+Route::get('/reviews', ListLinksController::class)
+    ->name('reviews.index');
+
+Route::redirect('/links', '/reviews', 301);
 
 Route::get('/jobs', fn () => abort(410));
 Route::get('/jobs/{any}', fn () => abort(410))

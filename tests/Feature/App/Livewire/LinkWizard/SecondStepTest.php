@@ -33,7 +33,7 @@ it('submits the link and notifies the admin', function () {
     $admin = User::factory()->create(['github_login' => 'benjamincrozat']);
 
     actingAs($user)
-        ->get(route('links.create'))
+        ->get(route('reviews.create'))
         ->assertOk();
 
     livewire(SecondStep::class, [
@@ -45,7 +45,7 @@ it('submits the link and notifies the admin', function () {
         ->assertDispatched('fetch')
         ->call('fetch')
         ->call('submit')
-        ->assertRedirect(route('links.index', ['submitted' => true]));
+        ->assertRedirect(route('reviews.index', ['submitted' => true]));
 
     assertDatabaseHas(Link::class, [
         'url' => $url,
@@ -58,7 +58,7 @@ it('submits the link and notifies the admin', function () {
 });
 
 it("doesn't allow guests", function () {
-    getJson(route('links.create'))
+    getJson(route('reviews.create'))
         ->assertUnauthorized();
 });
 

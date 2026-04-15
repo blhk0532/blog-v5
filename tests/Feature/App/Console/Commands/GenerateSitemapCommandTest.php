@@ -41,7 +41,7 @@ it('generates a sitemap with the most important pages', function () {
         ->cursor()
         ->each(fn (Category $category) => expect($content)->toContain(route('categories.show', $category->slug)));
 
-    expect($content)->toContain(route('links.index'));
+    expect($content)->toContain(route('reviews.index'));
 });
 
 it('generates a news sitemap with only eligible recent news posts', function () {

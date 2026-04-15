@@ -8,7 +8,7 @@ Presents the footer component UI and accepts component props, Blade attributes, 
             <a wire:navigate href="{{ route('home') }}">Home</a>
             <a wire:navigate href="{{ route('posts.index') }}">Complaints</a>
             <a wire:navigate href="{{ route('categories.index') }}">Categories</a>
-            <a wire:navigate href="{{ route('links.index') }}">Reviews</a>
+            <a wire:navigate href="{{ route('reviews.index') }}">Reviews</a>
             <a wire:navigate href="{{ route('advertise') }}">Advertise</a>
             <a wire:navigate href="{{ route('home') }}#about">About</a>
             <a href="mailto:hello@benjamincrozat.com">Contact</a>

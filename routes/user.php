@@ -11,6 +11,8 @@ Route::middleware('auth')
         Route::get('/comments', ListUserCommentsController::class)
             ->name('comments');
 
-        Route::get('/links', ListUserLinksController::class)
-            ->name('links');
+        Route::get('/reviews', ListUserLinksController::class)
+            ->name('reviews');
+
+        Route::redirect('/links', '/reviews', 301);
     });

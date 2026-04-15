@@ -15,7 +15,7 @@ it('passes approved links to the view', function () {
 
     Link::factory(2)->create();
 
-    get(route('links.index'))
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('links', function (LengthAwarePaginator $links) use ($approved) {
             return $links->count() === $approved->count() &&
@@ -30,7 +30,7 @@ it('orders links by is_approved in descending order', function () {
     $new = Link::factory()->approved()->create(['is_approved' => now()->subDay()]);
     $newest = Link::factory()->approved()->create(['is_approved' => now()]);
 
-    get(route('links.index'))
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('links', function (LengthAwarePaginator $links) use ($newest, $new, $old) {
             return $links->first()->id === $newest->id &&
@@ -54,7 +54,7 @@ it('passes distinct user avatars to the view', function () {
         Link::factory()->approved()->create(['user_id' => $user->id]);
     }
 
-    get(route('links.index'))
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('distinctUserAvatars', function (Collection $avatars) {
             return $avatars->count() <= 10 &&
@@ -81,7 +81,7 @@ it('excludes specific users from distinct user avatars', function () {
             ]);
         });
 
-    get(route('links.index'))
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('distinctUserAvatars', fn (Collection $avatars) => ! $avatars->contains('https://example.com/excluded-avatar.png'));
 });
@@ -105,7 +105,7 @@ it('passes distinct users count to the view', function () {
 
     Link::factory()->approved()->create(['user_id' => $excludedUser->id]);
 
-    get(route('links.index'))
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('distinctUsersCount', 5); // Only count non-excluded users with avatars.
 });
@@ -113,17 +113,17 @@ it('passes distinct users count to the view', function () {
 it('paginates the links collection', function () {
     Link::factory(15)->approved()->create();
 
-    get(route('links.index'))
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('links', fn (LengthAwarePaginator $links) => 12 === $links->count());
 });
 
-it('builds breadcrumbs for the links index', function () {
-    get(route('links.index'))
+it('builds breadcrumbs for the reviews index', function () {
+    get(route('reviews.index'))
         ->assertOk()
         ->assertViewHas('breadcrumbs', [
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Links'],
+            ['label' => 'Reviews'],
         ])
         ->assertViewHas('breadcrumbSchema', [
             '@context' => 'https://schema.org',
@@ -138,7 +138,7 @@ it('builds breadcrumbs for the links index', function () {
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
-                    'name' => 'Links',
+                    'name' => 'Reviews',
                 ],
             ],
         ]);

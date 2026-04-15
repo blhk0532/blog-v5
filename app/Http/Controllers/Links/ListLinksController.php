@@ -17,7 +17,7 @@ class ListLinksController extends Controller
     {
         $breadcrumbs = [
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Links'],
+            ['label' => 'Reviews'],
         ];
 
         $distinctUsersQuery = Link::query()
@@ -26,7 +26,7 @@ class ListLinksController extends Controller
             ->whereRelation('user', fn (Builder $query) => $query->where('github_login', '!=', 'benjamincrozat'))
             ->approved();
 
-        return view('links.index', [
+        return view('reviews.index', [
             'distinctUserAvatars' => $distinctUsersQuery
                 ->whereRelation('user', fn (Builder $query) => $query->whereNotNull('avatar'))
                 ->inRandomOrder()
