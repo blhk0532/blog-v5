@@ -26,7 +26,7 @@ it('lists posts', function () {
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
-                    'name' => 'Blog',
+                    'name' => 'Complaints',
                 ],
             ],
         ]);

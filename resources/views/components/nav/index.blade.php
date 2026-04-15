@@ -102,7 +102,7 @@ Presents the nav index component UI and accepts component props, Blade attribute
                     <x-dropdown.item
                         icon="heroicon-o-star"
                         wire:navigate
-                        href="{{ route('user.links') }}"
+                        href="{{ route('user.reviews') }}"
                     >
                         Your reviews
                     </x-dropdown.item>

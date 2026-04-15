@@ -21,7 +21,7 @@ Displays the home view.
             <x-btn
                 size="md"
                 wire:navigate
-                href="{{ route('complaints.create') }}"
+                href="{{ route('reviews.create') }}"
             >
                 Write A Review
             </x-btn>

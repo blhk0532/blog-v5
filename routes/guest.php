@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\LinkWizard\LinkWizard;
 use App\Http\Controllers\HomeController;
+use App\Livewire\ComplaintWizard\ComplaintWizard;
 use App\Http\Controllers\Posts\ShowPostController;
 use App\Http\Controllers\Links\ListLinksController;
 use App\Http\Controllers\Posts\ListPostsController;
@@ -20,7 +21,9 @@ use App\Http\Controllers\Advertising\ShowAdvertisingLandingPageController;
 Route::get('/', HomeController::class)
     ->name('home');
 
-Route::view('/file-a-complaint', 'complaints.create')->name('complaints.create');
+Route::livewire('/file-a-complaint', ComplaintWizard::class)
+    ->middleware('auth')
+    ->name('complaints.create');
 
 Route::get('/blog', ListPostsController::class)
     ->name('posts.index');

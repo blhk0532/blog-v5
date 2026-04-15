@@ -176,7 +176,7 @@ it('builds a single blog breadcrumb trail for posts and omits the current page U
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
-                    'name' => 'Blog',
+                    'name' => 'Complaints',
                     'item' => route('posts.index'),
                 ],
                 [

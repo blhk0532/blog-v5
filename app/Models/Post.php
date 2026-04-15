@@ -34,7 +34,19 @@ class Post extends Model implements Feedable
 
     protected $withCount = ['comments'];
 
-    protected $fillable = ['company_name', 'rating', 'location', 'status'];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'content',
+        'description',
+        'canonical_url',
+        'published_at',
+        'modified_at',
+        'company_name',
+        'rating',
+        'location',
+        'status',
+    ];
 
     protected function casts() : array
     {
