@@ -12,8 +12,17 @@ class CategoryFactory extends Factory
 {
     public function definition() : array
     {
+        $categories = [
+            'Banking', 'Retail', 'Technology', 'Telecommunications', 'Healthcare',
+            'Transportation', 'Insurance', 'Utilities', 'Government', 'Education',
+            'Real Estate', 'Hospitality', 'Automotive', 'Food & Beverage', 'Energy',
+            'Entertainment', 'Legal', 'Marketing', 'Manufacturing', 'Construction',
+        ];
+
+        $name = fake()->randomElement($categories) . ' ' . fake()->randomNumber(2);
+
         return [
-            'name' => ucfirst(fake()->word()),
+            'name' => $name,
             'slug' => fake()->slug(),
         ];
     }
