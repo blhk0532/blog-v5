@@ -41,7 +41,7 @@ class ShowPostController extends Controller
 
         $breadcrumbs = [
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Blog', 'url' => route('posts.index')],
+            ['label' => 'Complaints', 'url' => route('posts.index')],
             ['label' => $post->title],
         ];
 

@@ -20,6 +20,8 @@ use App\Http\Controllers\Advertising\ShowAdvertisingLandingPageController;
 Route::get('/', HomeController::class)
     ->name('home');
 
+Route::view('/file-a-complaint', 'complaints.create')->name('complaints.create');
+
 Route::get('/blog', ListPostsController::class)
     ->name('posts.index');
 

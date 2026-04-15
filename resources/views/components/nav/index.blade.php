@@ -17,17 +17,25 @@ Presents the nav index component UI and accepts component props, Blade attribute
         </div>
 
         <span class="text-base font-bold tracking-widest uppercase">
-            benjamincrozat.com
+            File a Complaint
         </span>
     </a>
 
     <div class="flex grow gap-6 justify-around items-center md:justify-end md:gap-8">
         <x-nav.item
+            active-icon="heroicon-s-document-text"
+            icon="heroicon-o-document-text"
+            href="{{ route('complaints.create') }}"
+        >
+            File a Complaint
+        </x-nav.item>
+
+        <x-nav.item
             active-icon="heroicon-s-fire"
             icon="heroicon-o-fire"
             href="{{ route('posts.index') }}"
         >
-            Latest
+            Complaints
         </x-nav.item>
 
         <x-nav.item
@@ -35,7 +43,7 @@ Presents the nav index component UI and accepts component props, Blade attribute
             icon="heroicon-o-link"
             href="{{ route('links.index') }}"
         >
-            Links
+            Companies
         </x-nav.item>
 
         <x-nav.item
@@ -43,7 +51,7 @@ Presents the nav index component UI and accepts component props, Blade attribute
             icon="heroicon-o-computer-desktop"
             href="{{ route('tools.index') }}"
         >
-            Tools
+            Categories
         </x-nav.item>
 
         @auth

@@ -34,6 +34,8 @@ class Post extends Model implements Feedable
 
     protected $withCount = ['comments'];
 
+    protected $fillable = ['company_name', 'rating', 'location', 'status'];
+
     protected function casts() : array
     {
         return [
@@ -41,6 +43,8 @@ class Post extends Model implements Feedable
             'sponsored_at' => 'datetime',
             'published_at' => 'datetime',
             'modified_at' => 'datetime',
+            'rating' => 'integer',
+            'status' => 'string',
         ];
     }
 

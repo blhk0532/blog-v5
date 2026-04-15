@@ -2,7 +2,7 @@
 Displays the posts index view.
 --}}
 
-<x-app title="The latest articles about web development in {{ date('Y') }}">
+    <x-app title="File a complaint against any company - Complaints">
     <div class="container mb-12 md:mb-14">
         <x-breadcrumbs :items="$breadcrumbs" />
     </div>

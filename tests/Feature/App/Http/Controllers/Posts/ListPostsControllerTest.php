@@ -11,7 +11,7 @@ it('lists posts', function () {
         ->assertViewHas('posts', fn (LengthAwarePaginator $posts) => true)
         ->assertViewHas('breadcrumbs', [
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Blog'],
+            ['label' => 'Complaints'],
         ])
         ->assertViewHas('breadcrumbSchema', [
             '@context' => 'https://schema.org',

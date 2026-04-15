@@ -16,7 +16,7 @@ class ListPostsController extends Controller
     {
         $breadcrumbs = [
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Blog'],
+            ['label' => 'Complaints'],
         ];
 
         return view('posts.index', [
